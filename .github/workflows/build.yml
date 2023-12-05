@@ -26,6 +26,8 @@ jobs:
         needs: [plan]
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest
+        environment: 
+            name: prod-apply
         env:
             TECTON_API_KEY: ${{ secrets.PROD_API_KEY }}
             API_SERVICE: ${{ vars.API_SERVICE }}
@@ -39,7 +41,7 @@ jobs:
                 echo "API_SERVICE variable => $API_SERVICE"
                 echo "WORKSPACE variable =>  $WORKSPACE"
                 echo "TECTON_API_KEY variable =>  $TECTON_API_KEY"            
-                
+
 # name: Tecton CICD - plan/apply
 
 # on:
