@@ -1,0 +1,41 @@
+name: Tecton CICD - plan/apply
+
+on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+
+jobs:
+    plan:
+        runs-on: ubuntu-latest
+        env:
+            TECTON_API_KEY: ${{ secrets.PROD_API_KEY }}
+            API_SERVICE: ${{ vars.API_SERVICE }}
+            WORKSPACE: ${{ vars.WORKSPACE }}
+        steps:
+        - uses: actions/checkout@v3
+
+        - name: print prod plan variables
+          run: |
+            echo Running plan on main push
+            echo "dev API_SERVICE variable => $API_SERVICE"
+            echo "dev WORKSPACE variable =>  $WORKSPACE"
+            echo "dev TECTON_API_KEY variable =>  $TECTON_API_KEY"    
+    apply:
+        needs: [plan]
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+        env:
+            TECTON_API_KEY: ${{ secrets.PROD_API_KEY }}
+            API_SERVICE: ${{ vars.API_SERVICE }}
+            WORKSPACE: ${{ vars.WORKSPACE }}
+        steps:
+            - uses: actions/checkout@v3
+    
+            - name: print prod apply variables
+              run: |
+                echo Running apply on main push
+                echo "dev API_SERVICE variable => $API_SERVICE"
+                echo "dev WORKSPACE variable =>  $WORKSPACE"
+                echo "dev TECTON_API_KEY variable =>  $TECTON_API_KEY"            
