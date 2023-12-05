@@ -18,7 +18,7 @@ jobs:
 
         - name: print prod plan variables
           run: |
-            echo Running plan on main push
+            echo Running plan
             echo "dev API_SERVICE variable => $API_SERVICE"
             echo "dev WORKSPACE variable =>  $WORKSPACE"
             echo "dev TECTON_API_KEY variable =>  $TECTON_API_KEY"    
@@ -35,7 +35,7 @@ jobs:
     
             - name: print prod apply variables
               run: |
-                echo Running apply on main push
-                echo "dev API_SERVICE variable => $API_SERVICE"
-                echo "dev WORKSPACE variable =>  $WORKSPACE"
-                echo "dev TECTON_API_KEY variable =>  $TECTON_API_KEY"            
+                echo Running apply
+                echo "API_SERVICE variable => $API_SERVICE"
+                echo "WORKSPACE variable =>  $WORKSPACE"
+                echo "TECTON_API_KEY variable =>  $TECTON_API_KEY"            
