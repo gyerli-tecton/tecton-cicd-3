@@ -91,7 +91,7 @@ jobs:
 
     apply:
         needs: [plan]
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.plan.outputs.planid != ''
         runs-on: ubuntu-latest
         environment: 
             name: prod-apply
